@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+
+        xmlns:sec="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+
+        xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+">
+
+
+    <sec:http auto-config="true" use-expressions="false" >
+        <sec:csrf />
+        <sec:intercept-url pattern="/cars**" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/cars/*" access="hasRole('ROLE_ADMIN')" />
+
+
+        <sec:form-login default-target-url="/cars" />
+        <sec:logout />
+    </sec:http>
+
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:user-service>
+                <sec:user name="test" password="{noop}123" authorities="ROLE_USER, ROLE_ADMIN" />
+                <sec:user name="bob" password="{noop}bobiscool" authorities="ROLE_USER" />
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+
+</beans:beans>

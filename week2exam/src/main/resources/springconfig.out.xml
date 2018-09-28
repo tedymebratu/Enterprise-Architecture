@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <aop:aspectj-autoproxy />
+   <!----> <aop:aspectj-autoproxy proxy-target-class="true" />
+
+
+    <bean id="a" class="cs544.w2exam.g2.ClassA" abstract="true" />
+    <bean id="b" class="cs544.w2exam.g2.ClassB" parent="a" init-method="start" destroy-method="stop">
+            <constructor-arg ref="c" />
+    </bean>
+    <bean id="c" class="cs544.w2exam.g2.ClassC" scope="prototype">
+            <property name="text" value="something" />
+    </bean>
+    <bean class="cs544.w2exam.g2.MyAspect">
+            <property name="classC" ref="c" />
+    </bean>
+
+
+</beans>

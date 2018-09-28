@@ -1,7 +1,15 @@
 package cs544.sample;
 
+import org.apache.logging.log4j.core.script.Script;
+import org.apache.taglibs.standard.tag.el.core.WhenTag;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.internal.constraintvalidators.hv.SafeHtmlValidator;
+
+import javax.faces.bean.NoneScoped;
+
 public class Car {
 	private int id;
+	@SafeHtml()
 	private String make;
 	private String model;
 	private int year;
